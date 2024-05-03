@@ -36,16 +36,14 @@
             cursor: pointer;
             transition: background-color 0.3s;
             text-decoration: none;
-
         }
 
         .add-button:hover {
             background-color: #1e88e5;
-           
         }
 
         .edit-button {
-            background-color: #4caf50; 
+            background-color: #4caf50;
             color: white;
             padding: 8px 16px;
             border: none;
@@ -57,6 +55,25 @@
 
         .edit-button:hover {
             background-color: #388e3c;
+        }
+
+        .view-button {
+            background-color: #ba68c8; /* Roxo claro */
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            position: relative;
+            top: -15px;
+        }
+
+        .view-button:hover {
+            background-color: #9c27b0; /* Roxo */
+            text-decoration: none;
         }
 
         table {
@@ -73,17 +90,14 @@
 
         th {
             background-color: #ffecb3;
-            
         }
 
         tbody tr:nth-child(even) {
             background-color: #f5f5f5;
-           
         }
 
         form button {
             background-color: #f48fb1;
-            
             color: white;
             padding: 8px 16px;
             border: none;
@@ -94,7 +108,6 @@
 
         form button:hover {
             background-color: #ec407a;
-          
         }
     </style>
 </head>
@@ -105,7 +118,6 @@
         <table>
             <thead>
                 <tr>
-
                     <th>Titulo</th>
                     <th>Autor</th>
                     <th>Descrição</th>
@@ -116,19 +128,18 @@
             <tbody>
                 @foreach($books as $book)
                 <tr>
-
                     <td>{{$book->title}}</td>
                     <td>{{$book->author}}</td>
                     <td>{{$book->description}}</td>
                     <td>{{$book->price}}</td>
                     <td>
+                        <a href="{{ route('book.show', $book->id) }}" class="view-button">Ver</a>
+                        <a href="{{route('book.edit', $book->id)}}" class="edit-button">Editar</a>
                         <form action="{{ route('book.destroy', $book->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Deletar</button>
                         </form>
-                        <a href="{{route('book.edit', $book->id)}}" class="edit-button">Editar</a>
-
                     </td>
                 </tr>
                 @endforeach
